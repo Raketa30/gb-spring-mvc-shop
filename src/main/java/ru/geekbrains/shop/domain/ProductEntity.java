@@ -30,6 +30,9 @@ public class ProductEntity {
     @NotNull(message = "Цена продукта обязательна")
     private Double cost;
 
+    @Column(name = "img_link")
+    private String imageLink;
+
     @ManyToMany
     @JoinTable(
             name = "product_category",
