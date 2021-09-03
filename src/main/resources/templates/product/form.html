@@ -9,7 +9,7 @@
 <body>
 <div th:replace="~{fragments/header::header}">Header</div>
 <div class="container my-4">
-    <form method="post" th:action="@{/product/form}" th:object="${product}">
+    <form enctype="multipart/form-data" method="post" th:action="@{/product/form}" th:object="${product}">
         <div class="form-row d-flex flex-sm-column justify-content-around">
             <div class="col-md-5 col-sm-12">
                 <div class="form-group">
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <div class="mb-3">
                         <label class="form-label" for="formFile">Choose image</label>
-                        <input accept="image/*" class="form-control" id="formFile" type="file">
+                        <input accept="image/*" class="form-control" id="formFile" name="image" type="file">
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
 <div th:replace="~{fragments/header::header}">Header</div>
 <div class="container d-flex justify-content-between my-4">
     <div class="card" style="width: 18rem;" th:each="product :${products}" th:object="${product}">
-        <img class="card-img-top" height="180" th:alt="*{title}" th:src="*{imageLink}" width="286">
+        <img class="card-img-top" height="180" th:alt="*{title}" th:src="@{${product.imageLink}}" width="286">
         <div class="card-body">
             <h5 class="card-title" th:field="*{title}" th:text="*{title}">Card title</h5>
             <p class="card-text" th:field="*{cost}" th:text="'Price: ' +  *{cost} + 'RUB'">Cost</p>
