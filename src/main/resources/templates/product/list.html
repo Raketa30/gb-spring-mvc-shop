@@ -8,16 +8,18 @@
 </head>
 <body>
 <div th:replace="~{fragments/header::header}">Header</div>
-<div class="container d-flex justify-content-between my-4">
-    <div class="card" style="width: 18rem;" th:each="product :${products}" th:object="${product}">
-        <img class="card-img-top" height="180" th:alt="*{title}" th:src="@{${product.imageLink}}" width="286">
-        <div class="card-body">
-            <h5 class="card-title" th:field="*{title}" th:text="*{title}">Card title</h5>
-            <p class="card-text" th:field="*{cost}" th:text="'Price: ' +  *{cost} + 'RUB'">Cost</p>
-            <div class="justify-content ">
-                <a class="btn btn-outline-primary" href="#"
-                   th:href="@{/product/form(id=${product.id})}">Редактировать</a>
-                <a class="btn btn-outline-danger" href="#" th:href="@{/product/delete(id=${product.id})}">Удалить</a>
+<div class="container d-flex flex-wrap justify-content-around my-4">
+    <div class="col-2 col-md-3 col-xs-12 col-sm-6" th:each="product :${products}" th:object="${product}">
+        <div class="card" style="width: 290px;">
+            <img class="card-img-top" height="180" th:alt="*{title}" th:src="@{${product.imageLink}}" width="286">
+            <div class="card-body">
+                <h5 class="card-title" th:field="*{title}" th:text="*{title}">Card title</h5>
+                <p class="card-text" th:field="*{cost}" th:text="'Price: ' +  *{cost} + ' RUB'">Cost</p>
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-outline-primary" href="#"
+                       th:href="@{/product/form(id=${product.id})}">Update</a>
+                    <a class="btn btn-outline-danger" href="#" th:href="@{/product/delete(id=${product.id})}">Delete</a>
+                </div>
             </div>
         </div>
     </div>

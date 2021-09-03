@@ -40,7 +40,7 @@ public class ProductController {
     @GetMapping("/form")
     public String getProductForm(Model model) {
         List<CategoryEntity> categories = categoryService.findAll();
-        model.addAttribute("product", new ProductDTO());
+        model.addAttribute("productDTO", new ProductDTO());
         model.addAttribute("categoryList", categories);
         return "product/form";
     }

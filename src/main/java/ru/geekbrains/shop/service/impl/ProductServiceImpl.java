@@ -4,23 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import ru.geekbrains.shop.domain.CategoryEntity;
 import ru.geekbrains.shop.domain.ProductEntity;
 import ru.geekbrains.shop.domain.dto.ProductDTO;
 import ru.geekbrains.shop.repository.ProductRepository;
+import ru.geekbrains.shop.service.CategoryService;
 import ru.geekbrains.shop.service.ProductService;
 import ru.geekbrains.shop.util.FileUtils;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, CategoryService categoryService) {
         this.productRepository = productRepository;
+        this.categoryService = categoryService;
     }
 
     @Override
@@ -47,7 +52,8 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity product = new ProductEntity();
         product.setTitle(productDTO.getTitle());
         product.setCost(productDTO.getCost());
-        product.setCategories(productDTO.getCategories());
+        Set<CategoryEntity> categories = categoryService.findAllByIdList(productDTO.getCategoryIds());
+        product.setCategories(categories);
         return product;
     }
 }

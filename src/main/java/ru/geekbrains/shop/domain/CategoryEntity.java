@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,6 +27,9 @@ public class CategoryEntity {
     @Column(name = "alias")
     @NotBlank(message = "Алиас категории обязательно")
     private String alias;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<ProductEntity> products = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "parent_id")

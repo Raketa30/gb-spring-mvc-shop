@@ -9,6 +9,7 @@ import ru.geekbrains.shop.repository.CategoryRepository;
 import ru.geekbrains.shop.service.CategoryService;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -32,5 +33,10 @@ public class CategoryServiceImpl implements CategoryService {
         entity.setAlias(categoryDTO.getAlias());
         entity.setParentCategory(categoryDTO.getParentCategory());
         return categoryRepository.save(entity);
+    }
+
+    @Override
+    public Set<CategoryEntity> findAllByIdList(List<Long> categoryIds) {
+        return categoryRepository.findAllByIdIn(categoryIds);
     }
 }

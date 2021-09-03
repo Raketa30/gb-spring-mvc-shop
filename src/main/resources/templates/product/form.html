@@ -9,7 +9,7 @@
 <body>
 <div th:replace="~{fragments/header::header}">Header</div>
 <div class="container my-4">
-    <form enctype="multipart/form-data" method="post" th:action="@{/product/form}" th:object="${product}">
+    <form enctype="multipart/form-data" method="post" th:action="@{/product/form}" th:object="${productDTO}">
         <div class="form-row d-flex flex-sm-column justify-content-around">
             <div class="col-md-5 col-sm-12">
                 <div class="form-group">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="productCategories">Choose categories</label>
-                    <select class="form-control" id="productCategories" multiple th:field="*{categories}">
+                    <select class="form-control" id="productCategories" multiple th:field="*{categoryIds}">
                         <option th:each="c : ${categoryList}" th:text="${c.title}" th:value="${c.id}">1</option>
                     </select>
                 </div>
