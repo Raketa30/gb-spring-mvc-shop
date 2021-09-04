@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.domain;
+package ru.geekbrains.shop.buisness.domain;
 
 import lombok.*;
 

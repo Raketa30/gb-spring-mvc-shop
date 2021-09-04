@@ -1,9 +1,9 @@
-package ru.geekbrains.shop.service;
+package ru.geekbrains.shop.buisness.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.geekbrains.shop.domain.ProductEntity;
-import ru.geekbrains.shop.domain.dto.ProductDTO;
+import ru.geekbrains.shop.buisness.domain.ProductEntity;
+import ru.geekbrains.shop.buisness.domain.dto.ProductDTO;
 
 import java.util.List;
 

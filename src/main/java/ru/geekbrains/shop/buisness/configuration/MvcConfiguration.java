@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.configuration;
+package ru.geekbrains.shop.buisness.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

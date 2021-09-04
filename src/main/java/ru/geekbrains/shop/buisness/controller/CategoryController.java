@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.controller;
+package ru.geekbrains.shop.buisness.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.geekbrains.shop.domain.CategoryEntity;
-import ru.geekbrains.shop.domain.dto.CategoryDTO;
-import ru.geekbrains.shop.service.CategoryService;
+import ru.geekbrains.shop.buisness.domain.CategoryEntity;
+import ru.geekbrains.shop.buisness.domain.dto.CategoryDTO;
+import ru.geekbrains.shop.buisness.service.CategoryService;
 
 import java.util.List;
 

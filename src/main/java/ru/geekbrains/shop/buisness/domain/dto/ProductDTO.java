@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.domain.dto;
+package ru.geekbrains.shop.buisness.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

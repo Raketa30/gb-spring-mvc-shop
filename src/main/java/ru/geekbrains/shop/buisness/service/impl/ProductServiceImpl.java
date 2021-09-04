@@ -1,15 +1,15 @@
-package ru.geekbrains.shop.service.impl;
+package ru.geekbrains.shop.buisness.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.geekbrains.shop.domain.CategoryEntity;
-import ru.geekbrains.shop.domain.ProductEntity;
-import ru.geekbrains.shop.domain.dto.ProductDTO;
-import ru.geekbrains.shop.repository.ProductRepository;
-import ru.geekbrains.shop.service.CategoryService;
-import ru.geekbrains.shop.service.ProductService;
+import ru.geekbrains.shop.buisness.domain.CategoryEntity;
+import ru.geekbrains.shop.buisness.domain.ProductEntity;
+import ru.geekbrains.shop.buisness.domain.dto.ProductDTO;
+import ru.geekbrains.shop.buisness.repository.ProductRepository;
+import ru.geekbrains.shop.buisness.service.CategoryService;
+import ru.geekbrains.shop.buisness.service.ProductService;
 import ru.geekbrains.shop.util.FileUtils;
 
 import java.nio.file.Path;
@@ -51,10 +51,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void deleteProductById(Long id) {
-        productRepository.deleteById(id);
+        productRepository.deleteProductEntityById(id);
     }
 
-    private ProductEntity getProductEntityFromDTO(ProductDTO productDTO) {
+    public ProductEntity getProductEntityFromDTO(ProductDTO productDTO) {
         ProductEntity product = new ProductEntity();
         product.setTitle(productDTO.getTitle());
         product.setCost(productDTO.getCost());

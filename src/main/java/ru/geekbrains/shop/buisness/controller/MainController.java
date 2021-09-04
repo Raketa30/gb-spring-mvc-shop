@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.controller;
+package ru.geekbrains.shop.buisness.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
-package ru.geekbrains.shop.service;
+package ru.geekbrains.shop.buisness.service;
 
-import ru.geekbrains.shop.domain.CategoryEntity;
-import ru.geekbrains.shop.domain.dto.CategoryDTO;
+import ru.geekbrains.shop.buisness.domain.CategoryEntity;
+import ru.geekbrains.shop.buisness.domain.dto.CategoryDTO;
 
 import java.util.List;
 import java.util.Set;
