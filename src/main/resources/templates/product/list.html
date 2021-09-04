@@ -16,9 +16,17 @@
                 <h5 class="card-title" th:field="*{title}" th:text="*{title}">Card title</h5>
                 <p class="card-text" th:field="*{cost}" th:text="'Price: ' +  *{cost} + ' RUB'">Cost</p>
                 <div class="d-flex justify-content-between">
+                    <!--                    <form th:action="@{/product/form/{id}(id=${product.id})}" method="get">-->
+                    <!--                        <button type="submit" class="btn btn-outline-primary">Update</button>-->
+                    <!--                    </form>-->
                     <a class="btn btn-outline-primary" href="#"
-                       th:href="@{/product/form(id=${product.id})}">Update</a>
-                    <a class="btn btn-outline-danger" href="#" th:href="@{/product/delete(id=${product.id})}">Delete</a>
+                       th:href="@{/product/form/{id}(id=${product.id})}">Update</a>
+                    <form th:action="@{/product/delete}" th:method="delete">
+                        <input th:name="id" th:value="${product.id}" type="hidden">
+                        <button class="btn btn-outline-danger" type="submit">Delete</button>
+                    </form>
+                    <!--                    <a class="btn btn-outline-primary" href="#" th:href="@{/product/form/{id}(id=${product.id})}">Update</a>-->
+                    <!--                    <a class="btn btn-outline-danger" href="#" th:href="@{/product/delete}" th:value="${product.id}">Delete</a>-->
                 </div>
             </div>
         </div>

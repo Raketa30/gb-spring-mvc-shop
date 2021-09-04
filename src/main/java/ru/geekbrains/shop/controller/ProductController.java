@@ -52,4 +52,10 @@ public class ProductController {
         productService.saveWithImage(product, image);
         return new RedirectView("/product/list");
     }
+
+    @PostMapping("/delete")
+    public RedirectView deleteProductById(@RequestParam Long id) {
+        productService.deleteProductById(id);
+        return new RedirectView("/product/list");
+    }
 }
