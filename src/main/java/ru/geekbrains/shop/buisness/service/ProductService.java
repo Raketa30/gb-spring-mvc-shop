@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.shop.buisness.domain.ProductEntity;
-import ru.geekbrains.shop.buisness.domain.dto.ProductDTO;
+import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
 
 import java.util.List;
 
@@ -13,10 +13,12 @@ import java.util.List;
 public interface ProductService {
     List<ProductEntity> getAllProducts();
 
-    ProductEntity saveWithImage(ProductDTO product, MultipartFile image);
+    ProductEntity saveWithImage(ProductDto product, MultipartFile image);
 
     void deleteProductById(Long id);
 
     Page<ProductEntity> findAllPaginated(Pageable pageRequest);
+
+    ProductDto getProductDtoById(Long id);
 }
 

@@ -6,9 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import ru.geekbrains.shop.buisness.domain.CategoryEntity;
 import ru.geekbrains.shop.buisness.domain.ProductEntity;
-import ru.geekbrains.shop.buisness.domain.dto.ProductDTO;
+import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
 import ru.geekbrains.shop.buisness.repository.ProductRepository;
 import ru.geekbrains.shop.buisness.service.CategoryService;
 import ru.geekbrains.shop.buisness.service.ProductService;
@@ -16,7 +15,7 @@ import ru.geekbrains.shop.util.FileUtils;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -37,8 +36,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductEntity saveWithImage(ProductDTO productDTO, MultipartFile image) {
-        ProductEntity product = getProductEntityFromDTO(productDTO);
+    public ProductEntity saveWithImage(ProductDto productDto, MultipartFile image) {
+        ProductEntity product = getProductEntityFromDTO(productDto);
         ProductEntity savedProduct = productRepository.save(product);
 
         if (image != null && !image.isEmpty()) {
@@ -60,12 +59,29 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll(pageRequest);
     }
 
-    public ProductEntity getProductEntityFromDTO(ProductDTO productDTO) {
-        ProductEntity product = new ProductEntity();
-        product.setTitle(productDTO.getTitle());
-        product.setCost(productDTO.getCost());
-        Set<CategoryEntity> categories = categoryService.findAllByIdList(productDTO.getCategoryIds());
-        product.setCategories(categories);
-        return product;
+    @Override
+    public ProductDto getProductDtoById(Long id) {
+        Optional<ProductEntity> optionalProductEntity = productRepository.findById(id);
+
+        if (optionalProductEntity.isPresent()) {
+            return getProductDtoFromEntity(optionalProductEntity.get());
+        }
+
+        return new ProductDto();
+    }
+
+    private ProductDto getProductDtoFromEntity(ProductEntity entity) {
+        return ProductDto.builder().id(entity.getId())
+                .title(entity.getTitle())
+                .cost(entity.getCost())
+                .categoryIds(categoryService.getCategoryIdList(entity.getCategories()))
+                .build();
+    }
+
+    public ProductEntity getProductEntityFromDTO(ProductDto dto) {
+        return ProductEntity.builder().title(dto.getTitle())
+                .cost(dto.getCost())
+                .categories(categoryService.findAllByIdList(dto.getCategoryIds()))
+                .build();
     }
 }

@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.shop.buisness.domain.CategoryEntity;
-import ru.geekbrains.shop.buisness.domain.dto.CategoryDTO;
+import ru.geekbrains.shop.buisness.domain.dto.CategoryDto;
 import ru.geekbrains.shop.buisness.repository.CategoryRepository;
 import ru.geekbrains.shop.buisness.service.CategoryService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryEntity addCategory(CategoryDTO categoryDTO) {
+    public CategoryEntity addCategory(CategoryDto categoryDTO) {
         CategoryEntity entity = new CategoryEntity();
         entity.setTitle(categoryDTO.getTitle());
         entity.setAlias(categoryDTO.getAlias());
@@ -38,5 +39,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Set<CategoryEntity> findAllByIdList(List<Long> categoryIds) {
         return categoryRepository.findAllByIdIn(categoryIds);
+    }
+
+    @Override
+    public List<Long> getCategoryIdList(Set<CategoryEntity> categories) {
+        List<Long> ids = new ArrayList<>();
+        categories.forEach(category -> ids.add(category.getId()));
+        return ids;
     }
 }

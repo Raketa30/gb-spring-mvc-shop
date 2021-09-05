@@ -6,16 +6,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.geekbrains.shop.buisness.domain.CategoryEntity;
 import ru.geekbrains.shop.buisness.domain.ProductEntity;
-import ru.geekbrains.shop.buisness.domain.dto.ProductDTO;
+import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
 import ru.geekbrains.shop.buisness.service.CategoryService;
 import ru.geekbrains.shop.buisness.service.ProductService;
 
@@ -61,16 +58,16 @@ public class ProductController {
     @GetMapping("/form")
     public String getProductForm(Model model) {
         List<CategoryEntity> categories = categoryService.findAll();
-        model.addAttribute("productDTO", new ProductDTO());
+        model.addAttribute("productDTO", new ProductDto());
         model.addAttribute("categoryList", categories);
         return "add";
     }
 
     @PostMapping("/form")
-    public RedirectView saveProduct(ProductDTO product,
+    public RedirectView saveProduct(ProductDto productDto,
                                     @RequestParam(required = false) MultipartFile image,
                                     RedirectAttributes attributes) {
-        productService.saveWithImage(product, image);
+        productService.saveWithImage(productDto, image);
         return new RedirectView("/product/list");
     }
 
@@ -78,5 +75,12 @@ public class ProductController {
     public RedirectView deleteProductById(@RequestParam Long id) {
         productService.deleteProductById(id);
         return new RedirectView("/product/list");
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateProduct(@PathVariable Long id, Model model) {
+        ProductDto productDTO = productService.getProductDtoById(id);
+        model.addAttribute("product", productDTO);
+        return "product/update";
     }
 }

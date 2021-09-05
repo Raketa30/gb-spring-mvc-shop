@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.geekbrains.shop.buisness.domain.CategoryEntity;
-import ru.geekbrains.shop.buisness.domain.dto.CategoryDTO;
+import ru.geekbrains.shop.buisness.domain.dto.CategoryDto;
 import ru.geekbrains.shop.buisness.service.CategoryService;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public String addCategory(CategoryDTO categoryDTO) {
+    public String addCategory(CategoryDto categoryDTO) {
         categoryService.addCategory(categoryDTO);
         return "redirect:/category/list";
     }
