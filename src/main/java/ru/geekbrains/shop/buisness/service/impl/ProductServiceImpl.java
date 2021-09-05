@@ -38,6 +38,18 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public ProductEntity saveWithImage(ProductDto productDto, MultipartFile image) {
         ProductEntity product = getProductEntityFromDTO(productDto);
+        return getProductEntity(image, product);
+    }
+
+    @Override
+    @Transactional
+    public ProductEntity updateWithImage(ProductDto productDto, MultipartFile image) {
+        ProductEntity product = productRepository.getById(productDto.getId());
+        updateProduct(product, productDto);
+        return getProductEntity(image, product);
+    }
+
+    private ProductEntity getProductEntity(MultipartFile image, ProductEntity product) {
         ProductEntity savedProduct = productRepository.save(product);
 
         if (image != null && !image.isEmpty()) {
@@ -47,6 +59,12 @@ public class ProductServiceImpl implements ProductService {
             productRepository.save(savedProduct);
         }
         return savedProduct;
+    }
+
+    private void updateProduct(ProductEntity product, ProductDto dto) {
+        product.setTitle(dto.getTitle());
+        product.setCost(dto.getCost());
+        product.setCategories(categoryService.findAllByIdList(dto.getCategoryIds()));
     }
 
     @Override
@@ -74,11 +92,12 @@ public class ProductServiceImpl implements ProductService {
         return ProductDto.builder().id(entity.getId())
                 .title(entity.getTitle())
                 .cost(entity.getCost())
+                .imgLink(entity.getImageLink())
                 .categoryIds(categoryService.getCategoryIdList(entity.getCategories()))
                 .build();
     }
 
-    public ProductEntity getProductEntityFromDTO(ProductDto dto) {
+    private ProductEntity getProductEntityFromDTO(ProductDto dto) {
         return ProductEntity.builder().title(dto.getTitle())
                 .cost(dto.getCost())
                 .categories(categoryService.findAllByIdList(dto.getCategoryIds()))

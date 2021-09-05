@@ -60,7 +60,7 @@ public class ProductController {
         List<CategoryEntity> categories = categoryService.findAll();
         model.addAttribute("productDTO", new ProductDto());
         model.addAttribute("categoryList", categories);
-        return "add";
+        return "product/add";
     }
 
     @PostMapping("/form")
@@ -80,7 +80,9 @@ public class ProductController {
     @GetMapping("/update/{id}")
     public String updateProduct(@PathVariable Long id, Model model) {
         ProductDto productDTO = productService.getProductDtoById(id);
+        List<CategoryEntity> categories = categoryService.findAll();
         model.addAttribute("product", productDTO);
+        model.addAttribute("categoryList", categories);
         return "product/update";
     }
 }

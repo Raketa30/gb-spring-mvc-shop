@@ -41,18 +41,18 @@ VALUES (2, 'test2', 'test_alias2', 1),
        (5, 'test5', 'test_alias5', 3);
 
 INSERT INTO product(id, title, cost, img_link)
-VALUES (1, 'test_product1', 0.01, 'upload/images/empty/empty.png'),
-       (2, 'test_product2', 0.01, 'upload/images/empty/empty.png'),
-       (3, 'test_product3', 0.01, 'upload/images/empty/empty.png'),
-       (4, 'test_product4', 0.01, 'upload/images/empty/empty.png'),
-       (5, 'test_product5', 0.01, 'upload/images/empty/empty.png'),
-       (6, 'test_product6', 0.01, 'upload/images/empty/empty.png'),
-       (7, 'test_product7', 0.01, 'upload/images/empty/empty.png'),
-       (8, 'test_product8', 0.01, 'upload/images/empty/empty.png'),
-       (9, 'test_product9', 0.01, 'upload/images/empty/empty.png'),
-       (10, 'test_product10', 0.01, 'upload/images/empty/empty.png'),
-       (11, 'test_product11', 0.01, 'upload/images/empty/empty.png'),
-       (12, 'test_product12', 0.01, 'upload/images/empty/empty.png');
+VALUES (1, 'test_product1', 0.01, '/upload/images/empty/empty.png'),
+       (2, 'test_product2', 0.01, '/upload/images/empty/empty.png'),
+       (3, 'test_product3', 0.01, '/upload/images/empty/empty.png'),
+       (4, 'test_product4', 0.01, '/upload/images/empty/empty.png'),
+       (5, 'test_product5', 0.01, '/upload/images/empty/empty.png'),
+       (6, 'test_product6', 0.01, '/upload/images/empty/empty.png'),
+       (7, 'test_product7', 0.01, '/upload/images/empty/empty.png'),
+       (8, 'test_product8', 0.01, '/upload/images/empty/empty.png'),
+       (9, 'test_product9', 0.01, '/upload/images/empty/empty.png'),
+       (10, 'test_product10', 0.01, '/upload/images/empty/empty.png'),
+       (11, 'test_product11', 0.01, '/upload/images/empty/empty.png'),
+       (12, 'test_product12', 0.01, '/upload/images/empty/empty.png');
 
 
 INSERT INTO product_category(product_id, category_id)

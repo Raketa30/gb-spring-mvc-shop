@@ -20,5 +20,7 @@ public interface ProductService {
     Page<ProductEntity> findAllPaginated(Pageable pageRequest);
 
     ProductDto getProductDtoById(Long id);
+
+    ProductEntity updateWithImage(ProductDto productDto, MultipartFile image);
 }
 
