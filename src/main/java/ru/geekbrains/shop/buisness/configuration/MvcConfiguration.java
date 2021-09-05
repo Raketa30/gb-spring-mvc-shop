@@ -15,7 +15,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
         String staticPath = Paths.get(System.getProperty("user.dir"), dirName).toFile().getAbsolutePath();
 
         registry.addResourceHandler("/" + dirName + "/**")
-                .addResourceLocations("file:/" + staticPath + "/");
+                .addResourceLocations("file://" + staticPath + "/");
 
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");

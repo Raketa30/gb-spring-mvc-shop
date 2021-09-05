@@ -1,6 +1,9 @@
 package ru.geekbrains.shop.buisness.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,8 @@ import ru.geekbrains.shop.buisness.service.CategoryService;
 import ru.geekbrains.shop.buisness.service.ProductService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/product")
@@ -31,9 +36,25 @@ public class ProductController {
     }
 
     @GetMapping("/list")
-    public String getProductListPage(Model model) {
-        List<ProductEntity> products = productService.getAllProducts();
-        model.addAttribute("products", products);
+    public String getProductListPage(
+            @RequestParam(required = false, defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            Model model
+    ) {
+        Pageable pageRequest = PageRequest.of(pageNum - 1, pageSize);
+        Page<ProductEntity> page = productService.findAllPaginated(pageRequest);
+
+        int totalPages = page.getTotalPages();
+
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("page", page);
+        model.addAttribute("pageSize", pageSize);
         return "product/list";
     }
 
@@ -42,7 +63,7 @@ public class ProductController {
         List<CategoryEntity> categories = categoryService.findAll();
         model.addAttribute("productDTO", new ProductDTO());
         model.addAttribute("categoryList", categories);
-        return "product/form";
+        return "add";
     }
 
     @PostMapping("/form")

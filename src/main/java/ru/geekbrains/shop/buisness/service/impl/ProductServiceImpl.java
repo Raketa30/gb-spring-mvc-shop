@@ -1,6 +1,8 @@
 package ru.geekbrains.shop.buisness.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,9 +51,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
     public void deleteProductById(Long id) {
-        productRepository.deleteProductEntityById(id);
+        productRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<ProductEntity> findAllPaginated(Pageable pageRequest) {
+        return productRepository.findAll(pageRequest);
     }
 
     public ProductEntity getProductEntityFromDTO(ProductDTO productDTO) {

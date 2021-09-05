@@ -6,5 +6,4 @@ import ru.geekbrains.shop.buisness.domain.ProductEntity;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
-    ProductEntity deleteProductEntityById(Long id);
 }
