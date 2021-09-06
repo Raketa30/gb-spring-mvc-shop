@@ -15,6 +15,6 @@ public class ProductDto {
     private Long id;
     private String title;
     private Double cost;
-    private String imgLink;
+    private String imageLink;
     private List<Long> categoryIds;
 }

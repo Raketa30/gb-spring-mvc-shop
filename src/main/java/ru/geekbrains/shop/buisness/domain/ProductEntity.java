@@ -11,7 +11,8 @@ import java.util.Set;
 @Entity
 @Table(name = "product", schema = "shop")
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"categories"})

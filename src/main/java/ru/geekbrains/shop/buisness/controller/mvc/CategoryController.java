@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.buisness.controller;
+package ru.geekbrains.shop.buisness.controller.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +12,10 @@ import ru.geekbrains.shop.buisness.service.CategoryService;
 
 import java.util.List;
 
+import static ru.geekbrains.shop.buisness.domain.constant.RequestNameConstant.CATEGORY;
+
 @Controller
-@RequestMapping("/category")
+@RequestMapping(CATEGORY)
 public class CategoryController {
     private final CategoryService categoryService;
 
