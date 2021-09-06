@@ -71,6 +71,14 @@ public class ProductController {
         return new RedirectView("/product/list");
     }
 
+    @PostMapping("/update")
+    public RedirectView updateProduct(@ModelAttribute ProductDto productDto,
+                                      @RequestParam(required = false) MultipartFile image,
+                                      RedirectAttributes attributes) {
+        productService.updateWithImage(productDto, image);
+        return new RedirectView("/product/list");
+    }
+
     @PostMapping("/delete")
     public RedirectView deleteProductById(@RequestParam Long id) {
         productService.deleteProductById(id);

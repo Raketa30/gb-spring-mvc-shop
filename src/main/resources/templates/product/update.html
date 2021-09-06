@@ -33,10 +33,11 @@
         </div>
         <div class="col-md-8">
             <form enctype="multipart/form-data" id="data" method="post"
-                  th:action="@{/product/form}"
+                  th:action="@{/product/update}"
                   th:object="${product}">
                 <div class="form-row">
                     <div class="form-group">
+                        <input th:field="*{id}" type="hidden">
                         <label class="form-label" for="productName">Product name</label>
                         <input class="form-control" id="productName" placeholder="Enter product name" size="30"
                                th:field="*{title}" type="text">
