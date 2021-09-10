@@ -23,20 +23,20 @@
                 <tbody>
                 <tr class="align-middle" th:each="entry, iter : ${shoppingCart.getCartItems}">
                     <td th:text="${iter.index  + 1}"></td>
-                    <td th:text="${entry.key.title}"></td>
-                    <td th:text="${entry.key.cost}"></td>
+                    <td th:text="${entry.value.product.title}"></td>
+                    <td th:text="${entry.value.product.cost}"></td>
                     <td>
                         <div class="row d-flex justify-content-center">
                             <div class="col-3">
                                 <form method="get" th:action="@{/cart/minus-one}">
-                                    <input th:name="id" th:value="${entry.key.id}" type="hidden">
+                                    <input th:name="id" th:value="${entry.key}" type="hidden">
                                     <button class="btn btn-outline-danger btn-sm" type="submit">-</button>
                                 </form>
                             </div>
-                            <div class="col-3" th:text="${entry.value}"></div>
+                            <div class="col-3" th:text="${entry.value.quantity}"></div>
                             <div class="col-3">
                                 <form method="get" th:action="@{/cart/plus-one}">
-                                    <input th:name="id" th:value="${entry.key.id}" type="hidden">
+                                    <input th:name="id" th:value="${entry.key}" type="hidden">
                                     <button class="btn btn-outline-success btn-sm" type="submit">+</button>
                                 </form>
                             </div>
@@ -46,8 +46,8 @@
                 <tr>
                     <td>TOTAL:</td>
                     <td></td>
-                    <td></td>
                     <td th:text="${shoppingCart.getTotalPrice}"></td>
+                    <td></td>
                 </tr>
                 </tbody>
             </table>
