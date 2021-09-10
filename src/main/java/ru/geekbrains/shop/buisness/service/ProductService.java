@@ -8,7 +8,6 @@ import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
 import ru.geekbrains.shop.buisness.search.ProductSearchCondition;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface ProductService {
@@ -24,6 +23,6 @@ public interface ProductService {
 
     ProductEntity updateWithImage(ProductDto productDto, MultipartFile image);
 
-    Optional<ProductEntity> getProductById(Long id);
+    ProductEntity getProductById(Long id);
 }
 

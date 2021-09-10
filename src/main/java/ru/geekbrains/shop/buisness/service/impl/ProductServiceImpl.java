@@ -16,6 +16,7 @@ import ru.geekbrains.shop.buisness.service.CategoryService;
 import ru.geekbrains.shop.buisness.service.ProductService;
 import ru.geekbrains.shop.util.FileUtils;
 
+import javax.persistence.EntityNotFoundException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +54,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<ProductEntity> getProductById(Long id) {
-        return productRepository.findById(id);
+    public ProductEntity getProductById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     private ProductEntity getProductEntity(MultipartFile image, ProductEntity product) {
