@@ -14,4 +14,6 @@ public interface CategoryService {
     Set<CategoryEntity> findAllByIdList(List<Long> categoryIds);
 
     List<Long> getCategoryIdList(Set<CategoryEntity> categories);
+
+    List<CategoryDto> findAllDto();
 }

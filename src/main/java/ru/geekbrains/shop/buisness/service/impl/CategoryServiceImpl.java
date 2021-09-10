@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
         CategoryEntity entity = new CategoryEntity();
         entity.setTitle(categoryDTO.getTitle());
         entity.setAlias(categoryDTO.getAlias());
-        entity.setParentCategory(categoryDTO.getParentCategory());
+        entity.setParentCategory(categoryRepository.findCategoryByTitle(categoryDTO.getParentCategory()));
         return categoryRepository.save(entity);
     }
 
@@ -46,5 +46,27 @@ public class CategoryServiceImpl implements CategoryService {
         List<Long> ids = new ArrayList<>();
         categories.forEach(category -> ids.add(category.getId()));
         return ids;
+    }
+
+    @Override
+    public List<CategoryDto> findAllDto() {
+        List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+        return getCategoryDtoListFromEntityList(categoryEntities);
+    }
+
+    private List<CategoryDto> getCategoryDtoListFromEntityList(List<CategoryEntity> categoryEntities) {
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        for (CategoryEntity categoryEntity : categoryEntities) {
+            categoryDtos.add(getCategoryDto(categoryEntity));
+        }
+        return categoryDtos;
+    }
+
+    private CategoryDto getCategoryDto(CategoryEntity entity) {
+        return CategoryDto.builder().id(entity.getId())
+                .title(entity.getTitle())
+                .alias(entity.getAlias())
+                .parentCategory(entity.getParentCategory().getTitle())
+                .build();
     }
 }
