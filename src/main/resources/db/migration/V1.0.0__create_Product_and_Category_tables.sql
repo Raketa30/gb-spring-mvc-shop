@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS product_category
     foreign key (category_id) references category (id)
 );
 
-INSERT INTO category(id, title, alias, parent_id)
-VALUES (1, 'test_root', 'test_root_alias', 1);
+INSERT INTO category(id, title, alias)
+VALUES (1, 'test_root', 'test_root_alias');
 
 INSERT INTO category(id, title, alias, parent_id)
 VALUES (2, 'test2', 'test_alias2', 1),

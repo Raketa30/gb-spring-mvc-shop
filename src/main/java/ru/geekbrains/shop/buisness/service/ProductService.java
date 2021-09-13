@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.shop.buisness.domain.ProductEntity;
 import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
-import ru.geekbrains.shop.buisness.search.ProductSearchCondition;
+import ru.geekbrains.shop.buisness.domain.search.ProductSearchCondition;
 
 import java.util.List;
 

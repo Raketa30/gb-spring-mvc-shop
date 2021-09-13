@@ -25,7 +25,7 @@ public class CategoryController {
     }
 
     @GetMapping("/list")
-    public String getGategoryListPage(Model model) {
+    public String getCategoryListPage(Model model) {
         List<CategoryEntity> categoryEntityList = categoryService.findAll();
         model.addAttribute("categories", categoryEntityList);
         return "category/list";

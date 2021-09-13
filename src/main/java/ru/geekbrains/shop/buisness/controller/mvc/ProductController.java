@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.geekbrains.shop.buisness.domain.CategoryEntity;
 import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
-import ru.geekbrains.shop.buisness.search.ProductSearchCondition;
+import ru.geekbrains.shop.buisness.domain.search.ProductSearchCondition;
 import ru.geekbrains.shop.buisness.service.CategoryService;
 import ru.geekbrains.shop.buisness.service.ProductService;
 
