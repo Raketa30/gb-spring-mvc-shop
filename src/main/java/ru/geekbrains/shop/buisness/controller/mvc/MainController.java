@@ -15,4 +15,9 @@ public class MainController {
     public String getWelcome(Model model) {
         return "welcome";
     }
+
+    @GetMapping("/admin")
+    public String getAdminPage() {
+        return "admin/main";
+    }
 }

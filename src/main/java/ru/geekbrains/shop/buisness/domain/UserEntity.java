@@ -1,8 +1,11 @@
-package ru.geekbrains.shop.security.domain;
+package ru.geekbrains.shop.buisness.domain;
 
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -11,20 +14,28 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "users")
-@ToString(exclude = "roleEntities")
-@EqualsAndHashCode(exclude = {"id", "roleEntities"})
+@Table(name = "user_data")
+@ToString(exclude = "roles")
+@EqualsAndHashCode(exclude = {"id", "roles"})
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username")
+    @NotBlank(message = "Username cannot be empty")
     private String username;
+
     @Column(name = "password")
+    @Size(min = 8)
+    @NotBlank(message = "Password cannot be empty")
     private String password;
+
     @Column(name = "email")
+    @Email(message = "Email is not correct")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
+
     @Column(name = "active")
     private boolean active;
 

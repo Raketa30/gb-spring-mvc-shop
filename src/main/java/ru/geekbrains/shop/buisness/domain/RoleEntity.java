@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.security.domain;
+package ru.geekbrains.shop.buisness.domain;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "role")
+@Table(name = "role_data")
 @EqualsAndHashCode(exclude = {"id"})
 public class RoleEntity implements GrantedAuthority {
     @Id

@@ -2,6 +2,7 @@ package ru.geekbrains.shop.buisness.controller.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +52,7 @@ public class ProductController {
     }
 
     @GetMapping("/form")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public String getProductForm(Model model) {
         List<CategoryEntity> categories = categoryService.findAll();
         model.addAttribute("productDTO", new ProductDto());
@@ -59,6 +61,7 @@ public class ProductController {
     }
 
     @PostMapping("/form")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public RedirectView saveProduct(ProductDto productDto,
                                     @RequestParam(required = false) MultipartFile image,
                                     RedirectAttributes attributes) {
@@ -67,6 +70,7 @@ public class ProductController {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public RedirectView updateProduct(@ModelAttribute ProductDto productDto,
                                       @RequestParam(required = false) MultipartFile image,
                                       RedirectAttributes attributes) {
@@ -75,12 +79,14 @@ public class ProductController {
     }
 
     @PostMapping("/delete")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public RedirectView deleteProductById(@RequestParam Long id) {
         productService.deleteProductById(id);
         return new RedirectView("/product/list");
     }
 
     @GetMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public String updateProduct(@PathVariable Long id, Model model) {
         ProductDto productDTO = productService.getProductDtoById(id);
         List<CategoryEntity> categories = categoryService.findAll();

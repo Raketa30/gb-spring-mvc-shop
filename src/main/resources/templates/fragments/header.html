@@ -24,20 +24,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/category/list}">Categories</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" href="#" th:href="@{/admin-panel}">Admin Panel</a>
+                </li>
+                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
                        id="navbarDropdown"
                        role="button">
                         Add
                     </a>
-                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" th:href="@{/product/form}">Add product</a></li>
-                        <li><a class="dropdown-item" href="#" th:href="@{/category/form}">Add category</a></li>
-                    </ul>
+                    <div>
+                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" th:href="@{/product/form}">Add product</a></li>
+                            <li><a class="dropdown-item" href="#" th:href="@{/category/form}">Add category</a></li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
             <div class="cart d-flex">
+
                 <a th:href="@{/cart}"><img alt="cart" class="me-auto" height="30" src="/static/img/cart.png" width="30"></a>
+                <div sec:authorize="isAuthenticated()" th:text="${user.username}"></div>
+
             </div>
         </div>
     </div>
