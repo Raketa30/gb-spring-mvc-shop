@@ -15,7 +15,7 @@ import ru.geekbrains.shop.buisness.service.impl.UserDetailsServiceImpl;
 
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceImpl userDetailsService;
@@ -36,13 +36,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
+                .defaultSuccessUrl("/").permitAll()
                 .and()
                 .rememberMe()
                 .and()
                 .logout()
-                .permitAll();
-
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/").permitAll();
     }
 
     @Bean

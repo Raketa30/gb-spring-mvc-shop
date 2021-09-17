@@ -24,10 +24,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/category/list}">Categories</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="#" th:href="@{/admin-panel}">Admin Panel</a>
                 </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
                        id="navbarDropdown"
                        role="button">
@@ -42,10 +42,22 @@
                 </li>
             </ul>
             <div class="cart d-flex">
+                <div>
+                    <a th:href="@{/cart}"><img alt="cart" class="me-auto" height="30" src="/static/img/cart.png"
+                                               width="30"></a>
+                </div>
+                <div class="ml-3 d-flex" sec:authorize="isAuthenticated()">
+                    <div class="ml-3">
+                        <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                    </div>
+                    <div class="ml-3">
+                        <form action="/logout" method="post">
+                            <button class="btn btn-outline-success mx-2" type="submit">Log out</button>
+                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+                        </form>
+                    </div>
 
-                <a th:href="@{/cart}"><img alt="cart" class="me-auto" height="30" src="/static/img/cart.png" width="30"></a>
-                <div sec:authorize="isAuthenticated()" th:text="${user.username}"></div>
-
+                </div>
             </div>
         </div>
     </div>

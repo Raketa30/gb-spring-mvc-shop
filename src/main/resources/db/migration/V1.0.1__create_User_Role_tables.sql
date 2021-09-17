@@ -31,7 +31,8 @@ values ('admin', 'admin', 'user@gmail.com');
 
 insert into user_role (user_id, role_id)
 values (1, 1),
-       (1, 2);
+       (1, 2),
+       (1, 3);
 
 create
 extension if not exists pgcrypto;

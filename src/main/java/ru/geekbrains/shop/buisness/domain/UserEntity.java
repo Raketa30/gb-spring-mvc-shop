@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -27,7 +26,6 @@ public class UserEntity {
     private String username;
 
     @Column(name = "password")
-    @Size(min = 8)
     @NotBlank(message = "Password cannot be empty")
     private String password;
 

@@ -9,50 +9,76 @@
 <body>
 <div th:replace="~{fragments/header::header}">Header</div>
 <div class="container">
-    <div class="col-md-8 d-flex flex-wrap justify-content-around">
-        <div class="row d-flex justify-content-between my-1 align-items-center">
-            <div class="col-auto" th:if="${page.getTotalPages()} > 0">
-                <div th:replace="~{fragments/pagination::pagination}">Pagination</div>
+    <div class="row d-flex mt-3">
+        <div class="col-md-8">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-7" th:if="${page.getTotalPages()} > 0">
+                    <div th:replace="~{fragments/pagination::pagination}">Pagination</div>
+                </div>
+                <div class="col-2">
+                    <form action="/user/list" th:method="get">
+                        <select class="form-select mr-sm-2" onchange="this.form.submit()" th:name="pageSize">
+                            <option th:selected="${pageSize} == 5" th:value="5">5</option>
+                            <option th:selected="${pageSize} == 10" th:value="10">10</option>
+                            <option th:selected="${pageSize} == 20" th:value="20">20</option>
+                            <option th:selected="${pageSize} == 50" th:value="50">50</option>
+                        </select>
+                    </form>
+                </div>
             </div>
-            <div class="col-auto">
-                <form action="/product/list" th:method="get">
-                    <select class="form-select mr-sm-2" onchange="this.form.submit()" th:name="pageSize">
-                        <option th:selected="${pageSize} == 5" th:value="5">5</option>
-                        <option th:selected="${pageSize} == 10" th:value="10">10</option>
-                        <option th:selected="${pageSize} == 20" th:value="20">20</option>
-                        <option th:selected="${pageSize} == 50" th:value="50">50</option>
-                    </select>
-                </form>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <table class="table">
+                        <thead class="table-info">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>E-mail</th>
+                            <th>Active</th>
+                            <th>Roles</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="align-middle" th:each="u :${page.getContent()}">
+                            <td th:text="${u.id}"></td>
+                            <td th:text="${u.username}"></td>
+                            <td th:text="${u.email}"></td>
+                            <td>
+                                <form action="/user/update" th:method="post" th:object="${u}">
+                                    <input class="form-checkbox mr-sm-2" onchange="this.form.submit()"
+                                           th:checked="*{isActive()}"
+                                           type="checkbox">
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/user/update" th:method="post">
+                                    <div class="form-row" th:each="r : ${roles}">
+                                        <input class="form-checkbox mr-sm-2 mr-2" id="roles"
+                                               onchange="this.form.submit()"
+                                               th:checked="${u.roles.contains(r)}"
+                                               type="checkbox">
+                                        <label for="roles" th:text="${r.name}"></label>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-danger" th:href="@{/user/delete/{id}(id=${u.id})}">Delete</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-info" th:href="@{/user/update/{id}(id=${u.id})}">Update</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="row m-1">
-            <table class="table">
-                <thead class="table-info">
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>E-mail</th>
-                    <th>Active</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="align-middle" th:each="u :${page.getContent()}">
-                    <td th:text="${u.id}"></td>
-                    <td th:text="${u.username}"></td>
-                    <td th:text="${u.email}"></td>
-                    <td>
-                        <!--                        <a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${c.id})}">Delete</a>-->
-                    </td>
-                    <td>
-                        <!--                        <a class="btn btn-outline-info" th:href="@{/update/{id}(id=${c.id})}">Update</a>-->
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row my-1">
-            <div th:replace="~{fragments/pagination::pagination}">Pagination</div>
+            <div class="row d-flex justify-content-center mt-2">
+                <div class="col-12">
+                    <div th:replace="~{fragments/pagination::pagination}">Pagination</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
