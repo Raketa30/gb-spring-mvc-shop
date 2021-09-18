@@ -84,6 +84,13 @@ public class UserServiceImpl implements UserService {
         throw new IllegalArgumentException("User not found, id:" + id);
     }
 
+    @Override
+    public void deleteUser(Long id) {
+        if (id != 1L) {
+            userRepository.deleteById(id);
+        }
+    }
+
     private UserDto getUserDtoFromEntity(UserEntity entity) {
         return UserDto.builder().id(entity.getId())
                 .username(entity.getUsername())

@@ -66,4 +66,10 @@ public class UserController {
         return new RedirectView("/user/list");
     }
 
+    @DeleteMapping("/delete")
+    public RedirectView deleteUser(@RequestBody Long id) {
+        userService.deleteUser(id);
+        return new RedirectView("/user/list");
+    }
+
 }

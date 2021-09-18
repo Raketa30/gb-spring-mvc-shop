@@ -47,16 +47,16 @@
                             <td th:text="${u.email}"></td>
                             <td>
                                 <input class="form-checkbox mr-sm-2" disabled="disabled"
-                                       onchange="this.form.submit()"
                                        th:checked="${u.isActive()}"
+                                       onchange="this.form.submit()"
                                        type="checkbox">
 
                             </td>
                             <td>
                                 <div class="form-row" th:each="r : ${roles}">
                                     <input class="form-checkbox mr-sm-2 mr-2" disabled="disabled"
-                                           id="roles"
                                            th:checked="${u.rolesId.contains(r.getId())}"
+                                           id="roles"
                                            type="checkbox"
                                     >
                                     <label for="roles" th:text="${r.name}"></label>
