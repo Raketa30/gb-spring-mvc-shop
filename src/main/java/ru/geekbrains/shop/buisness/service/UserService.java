@@ -10,4 +10,8 @@ public interface UserService {
 
     Page<UserDto> findAllPaginated(UserSearchCondition userSearchCondition);
 
+    void updateUser(UserDto user);
+
+    UserDto findUserDto(Long id);
+
 }

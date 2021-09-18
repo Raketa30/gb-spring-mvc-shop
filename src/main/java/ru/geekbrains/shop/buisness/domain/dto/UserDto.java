@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.geekbrains.shop.buisness.domain.RoleEntity;
 
-import java.util.Set;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,5 +16,5 @@ public class UserDto {
     private String username;
     private String email;
     private boolean active;
-    private Set<RoleEntity> roles;
+    private List<Long> rolesId;
 }

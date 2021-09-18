@@ -13,7 +13,7 @@
         <div class="col-md-8">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-7" th:if="${page.getTotalPages()} > 0">
-                    <div th:replace="~{fragments/pagination::pagination}">Pagination</div>
+                    <div th:replace="~{fragments/pagination::pagination('user')}">Pagination</div>
                 </div>
                 <div class="col-2">
                     <form action="/user/list" th:method="get">
@@ -46,22 +46,21 @@
                             <td th:text="${u.username}"></td>
                             <td th:text="${u.email}"></td>
                             <td>
-                                <form action="/user/update" th:method="post" th:object="${u}">
-                                    <input class="form-checkbox mr-sm-2" onchange="this.form.submit()"
-                                           th:checked="*{isActive()}"
-                                           type="checkbox">
-                                </form>
+                                <input class="form-checkbox mr-sm-2" disabled="disabled"
+                                       onchange="this.form.submit()"
+                                       th:checked="${u.isActive()}"
+                                       type="checkbox">
+
                             </td>
                             <td>
-                                <form action="/user/update" th:method="post">
-                                    <div class="form-row" th:each="r : ${roles}">
-                                        <input class="form-checkbox mr-sm-2 mr-2" id="roles"
-                                               onchange="this.form.submit()"
-                                               th:checked="${u.roles.contains(r)}"
-                                               type="checkbox">
-                                        <label for="roles" th:text="${r.name}"></label>
-                                    </div>
-                                </form>
+                                <div class="form-row" th:each="r : ${roles}">
+                                    <input class="form-checkbox mr-sm-2 mr-2" disabled="disabled"
+                                           id="roles"
+                                           th:checked="${u.rolesId.contains(r.getId())}"
+                                           type="checkbox"
+                                    >
+                                    <label for="roles" th:text="${r.name}"></label>
+                                </div>
                             </td>
                             <td>
                                 <a class="btn btn-outline-danger" th:href="@{/user/delete/{id}(id=${u.id})}">Delete</a>
@@ -76,7 +75,7 @@
             </div>
             <div class="row d-flex justify-content-center mt-2">
                 <div class="col-12">
-                    <div th:replace="~{fragments/pagination::pagination}">Pagination</div>
+                    <div th:replace="~{fragments/pagination::pagination('user')}">Pagination</div>
                 </div>
             </div>
         </div>

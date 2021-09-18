@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.shop.buisness.domain.RoleEntity;
 import ru.geekbrains.shop.buisness.domain.UserEntity;
 import ru.geekbrains.shop.buisness.domain.dto.UserDto;
@@ -15,8 +16,8 @@ import ru.geekbrains.shop.buisness.repository.RoleRepository;
 import ru.geekbrains.shop.buisness.repository.UserRepository;
 import ru.geekbrains.shop.buisness.service.UserService;
 
-import java.util.Collections;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean addUser(UserEntity user) {
         Optional<UserEntity> optional = userRepository.findByUsernameOrEmail(user.getUsername(), user.getEmail());
 
@@ -61,12 +63,37 @@ public class UserServiceImpl implements UserService {
         return productEntityPage.map(this::getUserDtoFromEntity);
     }
 
+    @Override
+    @Transactional
+    public void updateUser(UserDto user) {
+        Optional<UserEntity> optionalUserEntity = userRepository.findById(user.getId());
+        if (optionalUserEntity.isPresent()) {
+            UserEntity entity = optionalUserEntity.get();
+            entity.setActive(user.isActive());
+            entity.setRoles(new HashSet<>(roleRepository.findAllById(user.getRolesId())));
+            userRepository.save(entity);
+        }
+    }
+
+    @Override
+    public UserDto findUserDto(Long id) {
+        Optional<UserEntity> optionalUserEntity = userRepository.findById(id);
+        if (optionalUserEntity.isPresent()) {
+            return getUserDtoFromEntity(optionalUserEntity.get());
+        }
+        throw new IllegalArgumentException("User not found, id:" + id);
+    }
+
     private UserDto getUserDtoFromEntity(UserEntity entity) {
         return UserDto.builder().id(entity.getId())
                 .username(entity.getUsername())
                 .email(entity.getEmail())
                 .active(entity.isActive())
-                .roles(entity.getRoles())
+                .rolesId(getRolesIdList(entity.getRoles()))
                 .build();
+    }
+
+    private List<Long> getRolesIdList(Set<RoleEntity> roles) {
+        return roles.stream().map(RoleEntity::getId).collect(Collectors.toList());
     }
 }

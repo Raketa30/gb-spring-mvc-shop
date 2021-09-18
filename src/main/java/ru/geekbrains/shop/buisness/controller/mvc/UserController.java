@@ -2,10 +2,11 @@ package ru.geekbrains.shop.buisness.controller.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 import ru.geekbrains.shop.buisness.domain.RoleEntity;
 import ru.geekbrains.shop.buisness.domain.dto.UserDto;
 import ru.geekbrains.shop.buisness.domain.search.UserSearchCondition;
@@ -18,6 +19,7 @@ import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/user")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 public class UserController {
     private final UserService userService;
     private final RoleService roleService;
@@ -47,6 +49,21 @@ public class UserController {
         model.addAttribute("roles", roles);
 
         return "user/list";
+    }
+
+    @GetMapping("/update/{id}")
+    public String getUserUpdatePage(@PathVariable Long id, Model model) {
+        UserDto userDto = userService.findUserDto(id);
+        List<RoleEntity> roles = roleService.findAll();
+        model.addAttribute("user", userDto);
+        model.addAttribute("roles", roles);
+        return "user/update";
+    }
+
+    @PostMapping("/update")
+    public RedirectView updateUser(@ModelAttribute UserDto user) {
+        userService.updateUser(user);
+        return new RedirectView("/user/list");
     }
 
 }

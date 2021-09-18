@@ -27,36 +27,21 @@
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="#" th:href="@{/admin-panel}">Admin Panel</a>
                 </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                       id="navbarDropdown"
-                       role="button">
-                        Add
-                    </a>
-                    <div>
-                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" th:href="@{/product/form}">Add product</a></li>
-                            <li><a class="dropdown-item" href="#" th:href="@{/category/form}">Add category</a></li>
-                        </ul>
-                    </div>
-                </li>
             </ul>
-            <div class="cart d-flex">
-                <div>
-                    <a th:href="@{/cart}"><img alt="cart" class="me-auto" height="30" src="/static/img/cart.png"
-                                               width="30"></a>
-                </div>
-                <div class="ml-3 d-flex" sec:authorize="isAuthenticated()">
-                    <div class="ml-3">
+            <div class="d-flex justify-content-around align-text-top">
+                <a th:href="@{/cart}">
+                    <img alt="cart" class="me-auto" height="30" src="/static/img/cart.png" width="30">
+                </a>
+                <div class="d-flex" sec:authorize="isAuthenticated()">
+                    <div class="mx-2 navbar-text">
                         <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
                     </div>
-                    <div class="ml-3">
+                    <div>
                         <form action="/logout" method="post">
                             <button class="btn btn-outline-success mx-2" type="submit">Log out</button>
                             <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
