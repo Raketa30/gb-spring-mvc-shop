@@ -16,7 +16,8 @@
         <div class="col-md-8 d-flex flex-wrap justify-content-around">
             <div class="row d-flex justify-content-between my-1 align-items-center">
                 <div class="col-auto" th:if="${page.getTotalPages()} > 0">
-                    <div th:replace="~{fragments/pagination::pagination(pageName='product')}">Pagination</div>
+                    <div th:replace="~{fragments/pagination::pagination(pageName='product', list='list')}">Pagination
+                    </div>
                 </div>
                 <div class="col-auto">
                     <form action="/product/list" th:method="get">
@@ -47,31 +48,31 @@
                                    th:text="'Price: ' +  ${product.cost} + ' RUB'">
                                     Cost</p>
                                 <div class="d-flex justify-content-md-around justify-content-sm-around justify-content-xs-between">
-                                    <div class="col-3 col-sm-5 mr-2" sec:authorize="hasRole('ADMIN')">
-                                        <a class="btn btn-outline-primary" href="#"
-                                           th:href="@{/product/update/{id}(id=${product.id})}">
-                                            Update
-                                        </a>
-                                    </div>
-                                    <div class="col-3 col-sm-5" sec:authorize="hasRole('ADMIN')">
-                                        <form th:action="@{/product/delete}" th:method="delete">
-                                            <input th:name="id" th:value="${product.id}" type="hidden">
-                                            <button class="btn btn-outline-danger" type="submit">Delete</button>
-                                        </form>
-                                    </div>
+                                    <!--                                    <div class="col-3 col-sm-5 mr-2" sec:authorize="hasRole('ADMIN')">-->
+                                    <!--                                        <a class="btn btn-outline-primary" href="#"-->
+                                    <!--                                           th:href="@{/product/update/{id}(id=${product.id})}">-->
+                                    <!--                                            Update-->
+                                    <!--                                        </a>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div class="col-3 col-sm-5" sec:authorize="hasRole('ADMIN')">-->
+                                    <!--                                        <form th:action="@{/product/delete}" th:method="delete">-->
+                                    <!--                                            <input th:name="id" th:value="${product.id}" type="hidden">-->
+                                    <!--                                            <button class="btn btn-outline-danger" type="submit">Delete</button>-->
+                                    <!--                                        </form>-->
+                                    <!--                                    </div>-->
                                     <div class="col-3 col-sm-5">
                                         <form th:action="@{/cart/add-to-cart}" th:method="get">
                                             <input th:name="id" th:value="${product.id}" type="hidden">
                                             <button class="btn btn-outline-success" type="submit">Add to Cart</button>
                                         </form>
                                     </div>
-                                    <!--                                    <div class="col-3 col-sm-5">-->
-                                    <!--                                        <form th:action="@{/cart/delete-from-cart}" th:method="get">-->
-                                    <!--                                            <input th:name="id" th:value="${product.id}" type="hidden">-->
-                                    <!--                                            <button class="btn btn-outline-success" type="submit">Delete From Cart-->
-                                    <!--                                            </button>-->
-                                    <!--                                        </form>-->
-                                    <!--                                    </div>-->
+                                    <div class="col-3 col-sm-5">
+                                        <form th:action="@{/cart/delete-from-cart}" th:method="get">
+                                            <input th:name="id" th:value="${product.id}" type="hidden">
+                                            <button class="btn btn-outline-success" type="submit">Delete From Cart
+                                            </button>
+                                        </form>
+                                    </div>
 
                                 </div>
                             </div>
@@ -80,7 +81,7 @@
                 </div>
             </div>
             <div class="row my-1">
-                <div th:replace="~{fragments/pagination::pagination('product')}">Pagination</div>
+                <div th:replace="~{fragments/pagination::pagination(pageName='product', list='list')}">Pagination</div>
             </div>
         </div>
     </div>

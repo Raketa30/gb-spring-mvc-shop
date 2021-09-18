@@ -9,32 +9,32 @@
 <body>
 <div th:replace="~{fragments/header::header}">Header</div>
 <div class="container">
-    <div class="row d-flex flex-wrap mt-3">
-        <div class="card" style="width: 18rem;">
-            <img alt="..." class="card-img-top" src="...">
+    <div class="row d-flex flex-wrap mt-3 justify-content-center">
+        <div class="card m-2 p-1" style="width: 18em;">
+            <img alt="Users" class="card-img-top img-fluid rounded" src="/static/img/users.png"
+                 style="max-width: 100%; height: auto;">
             <div class="card-body">
                 <h5 class="card-title">Users</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a class="btn btn-primary" th:href="@{/user/list}">Go somewhere</a>
+                <p class="card-text">User Operations, Only for Admin Role</p>
+                <a class="btn btn-danger" th:href="@{/user/list}">User list</a>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
-            <img alt="..." class="card-img-top" src="...">
+        <div class="card  m-2 p-1" style="width: 18em;">
+            <img alt="Products" class="card-img-top img-fluid rounded" src="/static/img/products.png"
+                 style="max-width: 100%; height: auto;">
             <div class="card-body">
                 <h5 class="card-title">Products</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a class="btn btn-primary" href="#">Go somewhere</a>
+                <p class="card-text">Change Product List, Admin or Manager Role</p>
+                <a class="btn btn-primary" th:href="@{/product/admin/list}">Product list</a>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
-            <img alt="..." class="card-img-top" src="...">
+        <div class="card  m-2 p-1" style="width: 18em;">
+            <img alt="Categories" class="card-img-top img-fluid rounded" src="/static/img/category.png"
+                 style="max-width: 100%; height: auto;">
             <div class="card-body">
                 <h5 class="card-title">Categories</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <a class="btn btn-primary" href="#">Go somewhere</a>
+                <p class="card-text">Works with category, Admin or Manager Role</p>
+                <a class="btn btn-success" th:href="@{/category/admin/list}">Category list</a>
             </div>
         </div>
     </div>

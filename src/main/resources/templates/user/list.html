@@ -13,7 +13,7 @@
         <div class="col-md-8">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-7" th:if="${page.getTotalPages()} > 0">
-                    <div th:replace="~{fragments/pagination::pagination('user')}">Pagination</div>
+                    <div th:replace="~{fragments/pagination::pagination(pageName='user', list='list')}">Pagination</div>
                 </div>
                 <div class="col-2">
                     <form action="/user/list" th:method="get">
@@ -75,7 +75,7 @@
             </div>
             <div class="row d-flex justify-content-center mt-2">
                 <div class="col-12">
-                    <div th:replace="~{fragments/pagination::pagination('user')}">Pagination</div>
+                    <div th:replace="~{fragments/pagination::pagination(pageName='user', list='list')}">Pagination</div>
                 </div>
             </div>
         </div>
