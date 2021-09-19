@@ -52,7 +52,7 @@ public class ProductController {
     }
 
     @GetMapping("/form")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getProductForm(Model model) {
         List<CategoryEntity> categories = categoryService.findAll();
         model.addAttribute("productDTO", new ProductDto());
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     @PostMapping("/form")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public RedirectView saveProduct(ProductDto productDto,
                                     @RequestParam(required = false) MultipartFile image,
                                     RedirectAttributes attributes) {
@@ -70,7 +70,7 @@ public class ProductController {
     }
 
     @PostMapping("/update")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public RedirectView updateProduct(@ModelAttribute ProductDto productDto,
                                       @RequestParam(required = false) MultipartFile image,
                                       RedirectAttributes attributes) {
@@ -79,14 +79,14 @@ public class ProductController {
     }
 
     @PostMapping("/delete")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public RedirectView deleteProductById(@RequestParam Long id) {
         productService.deleteProductById(id);
         return new RedirectView("/product/list");
     }
 
     @GetMapping("/update/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String updateProduct(@PathVariable Long id, Model model) {
         ProductDto productDTO = productService.getProductDtoById(id);
         List<CategoryEntity> categories = categoryService.findAll();

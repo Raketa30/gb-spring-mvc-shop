@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/header::header}">Header</div>
+<div class="container my-4">
+    <div class="row mb-2 mt-2">
+        <div class="col-md-12">
+            <form class="m-0 p-0" method="post" th:action="@{/category/add}">
+                <div class="row justify-content-between">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input class="form-control" placeholder="Category title" th:name="title" type="text">
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" placeholder="Category alias" th:name="alias"
+                                       type="text">
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" placeholder="Категория" th:name="parentCategory">
+                                    <option th:each="c : ${categories}" th:text="${c.title}"
+                                            th:value="${c.id}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" type="submit">Add category</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mb-2 mt-2">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="table-info">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Alias</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="align-middle" th:each="c : ${categories}">
+                    <td th:text="${c.id}"></td>
+                    <td th:text="${c.title}"></td>
+                    <td th:text="${c.alias}"></td>
+                    <td>
+                        <a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${c.id})}">Delete</a>
+                    <td>
+                        <a class="btn btn-outline-info" th:href="@{/update/{id}(id=${c.id})}">Update</a>
+                    </td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer::footer}">Footer</div>
+<script crossorigin="anonymous" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
