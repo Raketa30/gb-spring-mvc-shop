@@ -9,7 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "category", schema = "shop")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

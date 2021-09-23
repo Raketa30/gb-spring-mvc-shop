@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProductDto {
+public class UserDto {
     private Long id;
-    private String title;
-    private Double cost;
-    private String imageLink;
-    private List<Long> categoryIds;
+    private String username;
+    private String email;
+    private boolean active;
+    private List<Long> rolesId;
 }

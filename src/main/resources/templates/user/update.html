@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update user</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/header::header}">Header</div>
+<div class="container">
+    <div class="row d-flex mt-3 justify-content-center my-4">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <form th:action="@{/user/update}" th:method="post" th:object="${user}">
+                <div class="mb-3">
+                    <input th:field="*{id}" th:value="${user.id}" type="hidden">
+                    <input minlength="6" placeholder="Username" th:class="form-control" th:name="username"
+                           th:placeholder="${user.username}" th:value="${user.username}" type="text">
+                </div>
+                <div class="form-row" th:each="r : ${roles}">
+                    <input class="form-checkbox mr-sm-2 mr-2" id="roles" th:checked="${user.rolesId.contains(r.id)}"
+                           th:name="rolesId"
+                           th:value="${r.id}"
+                           type="checkbox"
+                    >
+                    <label for="roles" th:text="${r.name}"></label>
+                </div>
+                <div class="form-row">
+                    <input class="form-checkbox mr-sm-2 mr-2" id="active" th:checked="${user.isActive()}"
+                           th:field="*{active}"
+                           th:value="${user.active}"
+                           type="checkbox"
+                    >
+                    <label for="active">Active</label>
+                </div>
+
+                <div class="form-row">
+                    <button class="btn btn-outline-primary" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer::footer}">Footer</div>
+<script crossorigin="anonymous" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

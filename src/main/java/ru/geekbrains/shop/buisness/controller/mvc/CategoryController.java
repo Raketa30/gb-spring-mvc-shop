@@ -1,6 +1,7 @@
-package ru.geekbrains.shop.buisness.controller;
+package ru.geekbrains.shop.buisness.controller.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,10 @@ import ru.geekbrains.shop.buisness.service.CategoryService;
 
 import java.util.List;
 
+import static ru.geekbrains.shop.buisness.domain.constant.RequestNameConstant.CATEGORY;
+
 @Controller
-@RequestMapping("/category")
+@RequestMapping(CATEGORY)
 public class CategoryController {
     private final CategoryService categoryService;
 
@@ -23,13 +26,22 @@ public class CategoryController {
     }
 
     @GetMapping("/list")
-    public String getGategoryListPage(Model model) {
-        List<CategoryEntity> categoryEntityList = categoryService.findAll();
-        model.addAttribute("categories", categoryEntityList);
+    public String getCategoryPage(Model model) {
+        List<CategoryDto> categories = categoryService.findAllDto();
+        model.addAttribute("categories", categories);
         return "category/list";
     }
 
+    @GetMapping("/admin/list")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public String getCategoryAdminListPage(Model model) {
+        List<CategoryEntity> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
+        return "category/admin-list";
+    }
+
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String addCategory(CategoryDto categoryDTO) {
         categoryService.addCategory(categoryDTO);
         return "redirect:/category/list";
