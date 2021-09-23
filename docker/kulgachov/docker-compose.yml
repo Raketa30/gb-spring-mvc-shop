@@ -7,16 +7,16 @@ volumes:
 services:
   postgres:
     image: postgres:9.6
-    container_name: gb-shop-postgres
+    container_name: simple-app-postgres
     volumes:
       - type: volume
-        source: gb-shop-postgres
+        source: simple-app-postgres
         target: /var/lib/postgresql/dataConfig
     environment:
-      POSTGRES_DB: shop-app
+      POSTGRES_DB: gb-shop
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrespass
     ports:
       - "5432:5432"
 
-# jdbc:postgresql://localhost:5432/shop-app
+# jdbc:postgresql://localhost:5432/simple-app

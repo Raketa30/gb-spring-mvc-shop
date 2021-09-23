@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-light navbar-expand-lg sticky-top" style="background-color: #e3f2fd;" th:fragment="header">
+    <div class="container">
+        <a class="navbar-brand" href="#" th:href="@{/}">
+            <img alt="" class="d-inline-block align-text-top" height="24" src="https://gb.ru/android-chrome-192x192.png"
+                 width="30">
+            GB-Shop
+        </a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a aria-current="page" class="nav-link" href="#" th:href="@{/product/list}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="@{/category/list}">Categories</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="#" th:href="@{/admin-panel}">Admin Panel</a>
+                </li>
+            </ul>
+            <div class="d-flex justify-content-around align-text-top">
+                <a th:href="@{/cart}">
+                    <img alt="cart" class="me-auto" height="30" src="/static/img/cart.png" width="30">
+                </a>
+                <div class="d-flex" sec:authorize="isAuthenticated()">
+                    <div class="mx-2 navbar-text">
+                        <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                    </div>
+                    <div>
+                        <form action="/logout" method="post">
+                            <button class="btn btn-outline-success mx-2" type="submit">Log out</button>
+                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
