@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.shop.buisness.domain.ProductEntity;
 import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
-import ru.geekbrains.shop.buisness.search.ProductSearchCondition;
+import ru.geekbrains.shop.buisness.domain.search.ProductSearchCondition;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface ProductService {
@@ -24,6 +23,6 @@ public interface ProductService {
 
     ProductEntity updateWithImage(ProductDto productDto, MultipartFile image);
 
-    Optional<ProductEntity> getProductById(Long id);
+    ProductEntity getProductById(Long id);
 }
 

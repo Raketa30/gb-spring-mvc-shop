@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
-import ru.geekbrains.shop.buisness.search.ProductSearchCondition;
+import ru.geekbrains.shop.buisness.domain.search.ProductSearchCondition;
 import ru.geekbrains.shop.buisness.service.ProductService;
 
 import java.util.List;

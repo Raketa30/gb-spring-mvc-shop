@@ -2,6 +2,7 @@ package ru.geekbrains.shop.buisness.controller.mvc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.geekbrains.shop.buisness.domain.CategoryEntity;
 import ru.geekbrains.shop.buisness.domain.dto.ProductDto;
-import ru.geekbrains.shop.buisness.search.ProductSearchCondition;
+import ru.geekbrains.shop.buisness.domain.search.ProductSearchCondition;
 import ru.geekbrains.shop.buisness.service.CategoryService;
 import ru.geekbrains.shop.buisness.service.ProductService;
 
@@ -51,6 +52,7 @@ public class ProductController {
     }
 
     @GetMapping("/form")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getProductForm(Model model) {
         List<CategoryEntity> categories = categoryService.findAll();
         model.addAttribute("productDTO", new ProductDto());
@@ -59,6 +61,7 @@ public class ProductController {
     }
 
     @PostMapping("/form")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public RedirectView saveProduct(ProductDto productDto,
                                     @RequestParam(required = false) MultipartFile image,
                                     RedirectAttributes attributes) {
@@ -67,6 +70,7 @@ public class ProductController {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public RedirectView updateProduct(@ModelAttribute ProductDto productDto,
                                       @RequestParam(required = false) MultipartFile image,
                                       RedirectAttributes attributes) {
@@ -75,12 +79,14 @@ public class ProductController {
     }
 
     @PostMapping("/delete")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public RedirectView deleteProductById(@RequestParam Long id) {
         productService.deleteProductById(id);
         return new RedirectView("/product/list");
     }
 
     @GetMapping("/update/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String updateProduct(@PathVariable Long id, Model model) {
         ProductDto productDTO = productService.getProductDtoById(id);
         List<CategoryEntity> categories = categoryService.findAll();
