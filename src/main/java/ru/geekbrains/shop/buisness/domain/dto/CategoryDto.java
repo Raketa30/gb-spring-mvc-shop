@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDto {
-    private Long id;
+    private long id;
     private String title;
     private String alias;
-    private String parentCategory;
+    private String parentCategory = "root";
 }

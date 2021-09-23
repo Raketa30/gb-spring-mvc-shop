@@ -11,5 +11,9 @@ import java.util.Set;
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
     Set<CategoryEntity> findAllByIdIn(List<Long> ids);
 
+    Set<CategoryEntity> findCategoryEntitiesByParentCategoryIsNotNull();
+
     CategoryEntity findCategoryByTitle(String parentCategory);
+
+
 }

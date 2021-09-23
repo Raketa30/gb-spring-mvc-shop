@@ -1,4 +1,4 @@
-package ru.geekbrains.shop.buisness.search;
+package ru.geekbrains.shop.buisness.domain.search;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -50,11 +50,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> findAllDto() {
-        List<CategoryEntity> categoryEntities = categoryRepository.findAll();
+        Set<CategoryEntity> categoryEntities = categoryRepository.findCategoryEntitiesByParentCategoryIsNotNull();
+        System.out.println(categoryEntities);
         return getCategoryDtoListFromEntityList(categoryEntities);
     }
 
-    private List<CategoryDto> getCategoryDtoListFromEntityList(List<CategoryEntity> categoryEntities) {
+    private List<CategoryDto> getCategoryDtoListFromEntityList(Set<CategoryEntity> categoryEntities) {
         List<CategoryDto> categoryDtos = new ArrayList<>();
         for (CategoryEntity categoryEntity : categoryEntities) {
             categoryDtos.add(getCategoryDto(categoryEntity));

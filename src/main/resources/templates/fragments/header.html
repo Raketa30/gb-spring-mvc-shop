@@ -24,20 +24,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="@{/category/list}">Categories</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                       id="navbarDropdown"
-                       role="button">
-                        Add
-                    </a>
-                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" th:href="@{/product/form}">Add product</a></li>
-                        <li><a class="dropdown-item" href="#" th:href="@{/category/form}">Add category</a></li>
-                    </ul>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" href="#" th:href="@{/admin-panel}">Admin Panel</a>
                 </li>
             </ul>
-            <div class="cart d-flex">
-                <a th:href="@{/cart}"><img alt="cart" class="me-auto" height="30" src="/static/img/cart.png" width="30"></a>
+            <div class="d-flex justify-content-around align-text-top">
+                <a th:href="@{/cart}">
+                    <img alt="cart" class="me-auto" height="30" src="/static/img/cart.png" width="30">
+                </a>
+                <div class="d-flex" sec:authorize="isAuthenticated()">
+                    <div class="mx-2 navbar-text">
+                        <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                    </div>
+                    <div>
+                        <form action="/logout" method="post">
+                            <button class="btn btn-outline-success mx-2" type="submit">Log out</button>
+                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

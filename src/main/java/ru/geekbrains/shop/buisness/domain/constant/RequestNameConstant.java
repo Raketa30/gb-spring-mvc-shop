@@ -6,6 +6,9 @@ public class RequestNameConstant {
     public static final String CATEGORY = "/category";
     public static final String PRODUCT = "/product";
 
+    public static final String AUTH = "/auth";
+    public static final String REGISTRATION = "/registration";
+
     private RequestNameConstant() {
 
     }

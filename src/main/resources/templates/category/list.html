@@ -9,61 +9,19 @@
 <body>
 <div th:replace="~{fragments/header::header}">Header</div>
 <div class="container my-4">
-    <div class="row mb-2 mt-2">
-        <div class="col-md-12">
-            <form class="m-0 p-0" method="post" th:action="@{/category/add}">
-                <div class="row justify-content-between">
-                    <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="Category title" th:name="title" type="text">
-                            </div>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="Category alias" th:name="alias"
-                                       type="text">
-                            </div>
-                            <div class="col-md-4">
-                                <select class="form-control" placeholder="Категория" th:name="parentCategory">
-                                    <option th:each="c : ${categories}" th:text="${c.title}"
-                                            th:value="${c.id}"></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-primary" type="submit">Add category</button>
-                    </div>
-                </div>
-            </form>
+    <div class="row mb-2 mt-2 d-flex justify-content-center">
+
+        <div class="card m-1" style="width: 18rem;" th:each="c : ${categories}">
+            <img alt="..." class="card-img-top" src="...">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${c.title}">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                <a class="btn btn-outline-primary" href="#" th:href="@{/product/list/{cat-id}(cat-id=${c.id})}">Go to
+                    products</a>
+            </div>
         </div>
-    </div>
-    <div class="row mb-2 mt-2">
-        <div class="col-md-12">
-            <table class="table">
-                <thead class="table-info">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Alias</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="align-middle" th:each="c : ${categories}">
-                    <td th:text="${c.id}"></td>
-                    <td th:text="${c.title}"></td>
-                    <td th:text="${c.alias}"></td>
-                    <td>
-                        <a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${c.id})}">Delete</a>
-                    <td>
-                        <a class="btn btn-outline-info" th:href="@{/update/{id}(id=${c.id})}">Update</a>
-                    </td>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
     </div>
 </div>
 <div th:replace="~{fragments/footer::footer}">Footer</div>
